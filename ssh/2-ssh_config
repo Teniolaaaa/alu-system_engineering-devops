@@ -1,0 +1,9 @@
+```ssh-config
+# SSH client configuration to use the private key ~/.ssh/school and prohibit password authentication
+
+Host 6924-web-01
+    HostName 6924-web-01
+    User ubuntu
+    IdentityFile ~/.ssh/school
+    PasswordAuthentication no
+```
