@@ -1,15 +1,21 @@
 #!/usr/bin/env bash
-# Installs nginx and sets up a simple web page
+# Install Nginx and configure the root page for Task 1
 
-# Update packages
+# Update package list
 apt-get update -y
 
-# Install nginx
+# Install Nginx
 apt-get install -y nginx
 
-# Set up the web page
-echo "Holberton School for the win!" > /var/www/html/index.nginx-debian.html
+# Ensure /var/www/html exists
+mkdir -p /var/www/html
 
-# Restart nginx (without systemctl)
+# Set the correct content for the root page
+echo "Holberton School for the win!" > /var/www/html/index.html
+
+# Make sure Nginx root points to /var/www/html
+sed -i 's|root .*;|root /var/www/html;|' /etc/nginx/sites-enabled/default
+
+# Restart Nginx without systemctl
 service nginx restart
 

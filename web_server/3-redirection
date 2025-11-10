@@ -1,13 +1,39 @@
 #!/usr/bin/env bash
-# Configures Nginx to redirect /redirect_me to YouTube
+# Configures a fresh Ubuntu server and sets up /redirect_me redirection
 
+# Update packages and install nginx
 apt-get update -y
 apt-get install -y nginx
 
+# Ensure the web root exists and create the main index page
 mkdir -p /var/www/html
+echo "Holberton School for the win!" > /var/www/html/index.html
 
-# Add redirection to default site
-sed -i '/server_name localhost;/a \    location /redirect_me {\n        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n    }' /etc/nginx/sites-enabled/default
+# Configure Nginx
+cat > /etc/nginx/sites-enabled/default <<'EOF'
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server ipv6only=on;
 
+    root /var/www/html;
+    index index.html index.htm;
+
+    server_name localhost;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    # Redirection for /redirect_me
+    location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+    }
+
+    # Custom 404 page (optional, can be removed if Task 4 is separate)
+    error_page 404 /custom_404.html;
+}
+EOF
+
+# Restart Nginx to apply changes
 service nginx restart
 
