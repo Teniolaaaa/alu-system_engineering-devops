@@ -7,5 +7,10 @@ apt-get -y install nginx
 # Overwrite default index.html
 echo "Holberton School" > /var/www/html/index.html
 
-# Ensure nginx is started
-service nginx restart
+# Ensure nginx listens on all interfaces (not just localhost)
+sed -i 's/listen 80 default_server;/listen 80 default_server;/g' /etc/nginx/sites-available/default
+sed -i 's/listen \[::\]:80 default_server;/listen [::]:80 default_server;/g' /etc/nginx/sites-available/default
+
+# Start nginx
+systemctl restart nginx
+systemctl enable nginx
