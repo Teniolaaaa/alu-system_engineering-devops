@@ -18,4 +18,3 @@ sed -i 's|root .*;|root /var/www/html;|' /etc/nginx/sites-enabled/default
 
 # Restart Nginx without systemctl
 service nginx restart
-
