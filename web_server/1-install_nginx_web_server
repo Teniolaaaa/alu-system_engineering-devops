@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
-# This script installs nginx, sets up a web server, and displays “Holberton School” on the main page
+# Script that installs and configures nginx to serve a page containing “Holberton School”
 
-# Update package list
-sudo apt-get update -y
+# Update packages
+apt-get -y update
 
-# Install nginx
-sudo apt-get install -y nginx
+# Install nginx quietly
+apt-get -y install nginx
 
-# Start nginx service
-sudo service nginx start
+# Make sure nginx is running
+service nginx start
 
-# Create a simple HTML page
-echo "Holberton School" | sudo tee /var/www/html/index.html > /dev/null
+# Create or replace the default index page
+echo "Holberton School" > /var/www/html/index.html
 
-# Ensure nginx is running and serving content on port 80
-sudo service nginx restart
+# Restart nginx to ensure changes take effect
+service nginx restart
