@@ -1,14 +1,10 @@
 #!/usr/bin/env bash
-# Script to install nginx and serve Holberton School page on port 80
+# Installs and configures nginx web server on Ubuntu to serve "Holberton School"
 
-apt-get update -y
+apt-get update
 apt-get install -y nginx
 
 mkdir -p /var/www/html
-echo "Holberton School" > /var/www/html/index.html
+echo "Holberton School for the win!" > /var/www/html/index.html
 
-# Ensure nginx uses this index page
-sed -i 's|root /var/www/html;|root /var/www/html;|' /etc/nginx/sites-available/default
-sed -i 's|index index.html index.htm index.nginx-debian.html;|index index.html;|' /etc/nginx/sites-available/default
-
-service nginx restart
+service nginx start
