@@ -3,5 +3,9 @@
 
 apt-get update
 apt-get -y install nginx
+
+# Overwrite default index.html
 echo "Holberton School" > /var/www/html/index.html
+
+# Ensure nginx is started
 service nginx restart
