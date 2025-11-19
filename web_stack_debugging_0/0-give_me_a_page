@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Fix Apache to return Hello Holberton
+
+sudo service apache2 start
+echo "Hello Holberton" > /var/www/html/index.html
